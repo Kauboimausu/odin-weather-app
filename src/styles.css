@@ -1,15 +1,24 @@
 body {
     display: flex;
+    height: 100vh;
     flex-direction: column;
+    justify-content: flex-start;
+    gap: 50px;
     align-items: center;
+    font-family: Arimo;
+    --universal-background: rgb(0, 0, 0, .4);
 }
 
 #location-form {
+    display: flex;
+    align-items: center;
     width: 800px;
     border: 1px solid black;
     display: flex;
     padding: 20px 50px;
     gap: 15px;
+    background-color: var(--universal-background);
+    color: white;
 }
 
 .temperature-type {
@@ -18,17 +27,43 @@ body {
     gap: 20px;
 }
 
+#celsius {
+    padding: 5px 10px;
+    font-size: 1.1rem;
+    background-color: rgb(164, 30, 30);
+    color: white;
+    border: none;
+}
+
+#fahrenheit {
+    font-size: 1.1rem;
+    padding: 5px 10px;
+    background-color: rgb(59, 122, 218);
+    border: none;
+    color: whitez;
+}
+
 .current-conditions {
-    width: 800px;
-    border: 1px solid black;
+    width: 600px;
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    grid-template-rows: 2fr 1fr;
+    align-items: center;
+    justify-items: center;
+    font-size: 1.75rem;
+}
+
+.current-location {
+    grid-column: 1/-1;
+    font-size: 1.5rem;
 }
 
 .hourly-weather-cards {
     display: grid;
     grid-template-columns: repeat(12, 1fr);
-    grid-template-rows: repeat(2, 200px);
+    grid-template-rows: repeat(2, 180px);
     column-gap: 25px;
-    row-gap: 30px;
+    row-gap: 20px;
 }
 
 .hourly-card {
@@ -38,6 +73,7 @@ body {
     flex-direction: column;
     justify-content: space-evenly;
     align-items: center;
+    border: 1px solid black;
 }
 
 /* Icons */

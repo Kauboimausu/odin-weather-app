@@ -38,7 +38,7 @@ const getTimeInMeridiemFormat = function(timeString) {
 // Function that tells whether a given time is daytime or not
 const timeIsDayTime = function(time) {
     const hour = time.split(":")[0];
-    return (hour >= 6 && hour < 8) ? true : false;
+    return (hour >= 7 && hour < 20) ? true : false;
 }
 
 // Given a description and a time returns the appropriate icon image source
