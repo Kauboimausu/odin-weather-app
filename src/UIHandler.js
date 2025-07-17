@@ -1,5 +1,5 @@
 import { lookUpCity } from "./weatherAPI";
-import { convertToCelsius, getAppropriateImageSrc, getTimeInMeridiemFormat } from "./aux";
+import { convertToCelsius, convertToFahrenheit, getAppropriateImageSrc, getTimeInMeridiemFormat } from "./aux";
 
 const UIHandler = (function () {
 
@@ -15,9 +15,9 @@ const UIHandler = (function () {
         currentIcon.src = getAppropriateImageSrc(currentConditions.icon, currentConditions.datetime);
         // We convert the temperature depending on whether celsius is turned on or not 
         if(!displayFahrenheit) {
-            currentTemperature.textContent = `${convertToCelsius(currentConditions.temp)}ºC`;
+            currentTemperature.textContent = `${convertToCelsius(currentConditions.temp)}º C`;
         } else {
-            currentTemperature.textContent = `${currentConditions.temp}ºF`;
+            currentTemperature.textContent = `${currentConditions.temp}º F`;
         }
         currentTime.textContent = getTimeInMeridiemFormat(currentConditions.datetime);
         currentLocation.textContent = localAdress;
@@ -33,9 +33,9 @@ const UIHandler = (function () {
             cardFields[0].src = getAppropriateImageSrc(hourData.icon, hourData.datetime);
             cardFields[1].textContent = getTimeInMeridiemFormat(hourData.datetime);
             if(!displayFahrenheit) {
-                cardFields[2].textContent = `${convertToCelsius(hourData.temp)}ºC`;
+                cardFields[2].textContent = `${convertToCelsius(hourData.temp)}º C`;
             } else {
-                cardFields[2].textContent = `${hourData.temp}ºF`;
+                cardFields[2].textContent = `${hourData.temp}º F`;
             }
             const precipitationInfo = cardFields[3].children;
             precipitationInfo[1].textContent = `${hourData.precipprob}%`;
@@ -63,6 +63,48 @@ const UIHandler = (function () {
     };
 
     addSearchBarListener();
+
+    const changeTemperatureDisplays = function(changeTo) {
+        const currentTemperature = document.querySelector(".current-temperature");
+        const cardTemperatures = document.querySelectorAll(".card-temperature");
+        let currentTemperatureValue = currentTemperature.textContent;
+        currentTemperatureValue = currentTemperatureValue.split("º")[0];
+        if(changeTo === "C") {
+            currentTemperature.textContent = `${convertToCelsius(currentTemperatureValue)}º C`;
+        } else {
+            currentTemperature.textContent = `${convertToFahrenheit(currentTemperatureValue)}º F`;
+        }
+        for(let index = 0; index < cardTemperatures.length; index++) {
+            let cardTemperatureValue = cardTemperatures[index].textContent;
+            cardTemperatureValue = cardTemperatureValue.split("º")[0];
+            if(changeTo === "C") {
+                cardTemperatures[index].textContent = `${convertToCelsius(cardTemperatureValue)}º C`;
+            } else {
+                cardTemperatures[index].textContent = `${convertToFahrenheit(cardTemperatureValue)}º F`;
+            }
+        }
+    }
+
+
+    // Functionality to change in which system temperature is displayed
+    const fahrenheitButton = document.getElementById("fahrenheit");
+    const celsiusButton = document.getElementById("celsius");
+    fahrenheitButton.addEventListener("click", () => {
+        // If fahrenheit display is already turned on we don't have to do anything
+        if(!displayFahrenheit) {
+            displayFahrenheit = true;
+            changeTemperatureDisplays("F");
+        }
+    });
+    celsiusButton.addEventListener("click", () => {
+        // If celsius display is already turned on we don't have to do anything
+        if(displayFahrenheit) {
+            displayFahrenheit = false;
+            changeTemperatureDisplays("C");
+        }
+    })
+
+
 })();
 
 export { UIHandler };

@@ -13,6 +13,12 @@ const convertToCelsius = function(fahrenheit) {
     return (Math.round(fahrenheit * 10) / 10);
 }
 
+const convertToFahrenheit = function(celsius) {
+    celsius = celsius * 1.8;
+    celsius += 32;
+    return (Math.round(celsius * 10) / 10);
+}
+
 // Tells whether a given time is A.M. or P.M.
 const getTimeInMeridiemFormat = function(timeString) {
     let hours, minutes, meridiem;
@@ -61,4 +67,4 @@ const getAppropriateImageSrc = function(description, time) {
     }
 }
 
-export { convertToCelsius, getTimeInMeridiemFormat, getAppropriateImageSrc};
+export { convertToCelsius, convertToFahrenheit, getTimeInMeridiemFormat, getAppropriateImageSrc};
