@@ -1,5 +1,5 @@
 import { lookUpCity } from "./weatherAPI";
-import { convertToCelsius, getTimeInMeridiemFormat } from "./aux";
+import { convertToCelsius, getAppropriateImageSrc, getTimeInMeridiemFormat } from "./aux";
 
 const UIHandler = (function () {
 
@@ -12,6 +12,7 @@ const UIHandler = (function () {
         const currentLocation = document.querySelector(".current-location");
 
         currentIcon.alt = currentConditions.conditions;
+        currentIcon.src = getAppropriateImageSrc(currentConditions.icon, currentConditions.datetime);
         // We convert the temperature depending on whether celsius is turned on or not 
         if(!displayFahrenheit) {
             currentTemperature.textContent = `${convertToCelsius(currentConditions.temp)}ºC`;
@@ -29,13 +30,15 @@ const UIHandler = (function () {
             const hourCard = hourCards[index];
             const cardFields = hourCard.children;
             cardFields[0].alt = hourData.icon;
+            cardFields[0].src = getAppropriateImageSrc(hourData.icon, hourData.datetime);
             cardFields[1].textContent = getTimeInMeridiemFormat(hourData.datetime);
             if(!displayFahrenheit) {
                 cardFields[2].textContent = `${convertToCelsius(hourData.temp)}ºC`;
             } else {
                 cardFields[2].textContent = `${hourData.temp}ºF`;
             }
-            cardFields[3].textContent = `Precipitation Probability: ${hourData.precipprob}`;
+            const precipitationInfo = cardFields[3].children;
+            precipitationInfo[1].textContent = `${hourData.precipprob}%`;
         }
     }
 

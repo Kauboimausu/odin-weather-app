@@ -1,0 +1,63 @@
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#location-form {
+    width: 800px;
+    border: 1px solid black;
+    display: flex;
+    padding: 20px 50px;
+    gap: 15px;
+}
+
+.temperature-type {
+    display: flex;
+    margin-left: auto;
+    gap: 20px;
+}
+
+.current-conditions {
+    width: 800px;
+    border: 1px solid black;
+}
+
+.hourly-weather-cards {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    grid-template-rows: repeat(2, 200px);
+    column-gap: 25px;
+    row-gap: 30px;
+}
+
+.hourly-card {
+    padding: 20px 10px;
+    font-size: .8rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+/* Icons */
+
+.current-weather-icon {
+    width: 225px;
+    height: 225px;
+}
+
+.card-icon {
+    height: 60px;
+    width: 60px;
+}
+
+.card-precipitation {
+    display: flex;
+    gap: 5px;
+}
+
+.precipitation-icon {
+    width: 20px;
+    height: 20px;
+}
