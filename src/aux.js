@@ -67,4 +67,4 @@ const getAppropriateImageSrc = function(description, time) {
     }
 }
 
-export { convertToCelsius, convertToFahrenheit, getTimeInMeridiemFormat, getAppropriateImageSrc};
+export { convertToCelsius, convertToFahrenheit, getTimeInMeridiemFormat, getAppropriateImageSrc, timeIsDayTime};

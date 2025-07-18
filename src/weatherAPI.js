@@ -8,4 +8,10 @@ const lookUpCity = async function(city){
     return weatherData;
 }
 
-export { lookUpCity };
+const lookByCoords = async function(lat, long) {
+    let weatherData = await fetch(`${apiBaseQuery}${lat},${long}?key=${apiKey}`, {mode: "cors"})
+    weatherData = await weatherData.json();
+    return weatherData;
+}
+
+export { lookUpCity, lookByCoords };

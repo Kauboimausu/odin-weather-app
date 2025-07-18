@@ -1,5 +1,5 @@
-import { lookUpCity } from "./weatherAPI";
-import { convertToCelsius, convertToFahrenheit, getAppropriateImageSrc, getTimeInMeridiemFormat } from "./aux";
+import { lookByCoords, lookUpCity } from "./weatherAPI";
+import { convertToCelsius, convertToFahrenheit, getAppropriateImageSrc, getTimeInMeridiemFormat, timeIsDayTime } from "./aux";
 
 const UIHandler = (function () {
 
@@ -42,14 +42,36 @@ const UIHandler = (function () {
         }
     }
 
-    const retrieveAndDisplay = function(location) {
-        lookUpCity(location).then(
+    const addAppropriateBackgroundColor = function(time) {
+        const isDayTime = timeIsDayTime(time);
+        const body = document.querySelector("body");
+        if(isDayTime) {
+            body.style.backgroundColor = "var(--day-background-color)";
+        } else {
+            body.style.backgroundColor = "var(--night-background-color)";
+        }
+    }
+
+    const retrieveAndDisplay = function(location, byCity=true) {
+        if(byCity) {
+            lookUpCity(location).then(
                 function (weatherData) {
                     console.log(weatherData);
                     displayMainCard(weatherData.currentConditions, weatherData.resolvedAddress);
                     displayHourCards(weatherData.days[0].hours);
+                    addAppropriateBackgroundColor(weatherData.currentConditions.datetime);
                 },
             );
+        } else {
+            lookByCoords(location[0], location[1]).then(
+                function (weatherData) {
+                    console.log(weatherData);
+                    displayMainCard(weatherData.currentConditions, weatherData.resolvedAddress);
+                    displayHourCards(weatherData.days[0].hours);
+                    addAppropriateBackgroundColor(weatherData.currentConditions.datetime);
+                },
+            );
+        }
     }
 
     const addSearchBarListener = function () {
@@ -59,6 +81,7 @@ const UIHandler = (function () {
             e.preventDefault();
             const locationData = new FormData(locationForm);
             retrieveAndDisplay(locationData.get("location"));
+            locationForm.reset();
         });
     };
 
@@ -96,6 +119,8 @@ const UIHandler = (function () {
             changeTemperatureDisplays("C");
         }
     });
+
+    return { retrieveAndDisplay };
 
 })();
 

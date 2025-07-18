@@ -74,6 +74,7 @@ body {
 .current-location {
     grid-column: 1/-1;
     font-size: 1.5rem;
+    text-align: center;
 }
 
 .hourly-weather-cards {
@@ -92,7 +93,7 @@ body {
     flex-direction: column;
     justify-content: space-evenly;
     align-items: center;
-    background-color: rgb(255, 255, 255, .8);
+    background-color: rgb(255, 255, 255);
     border-radius: 20px;
 }
 
