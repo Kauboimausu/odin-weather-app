@@ -87,23 +87,15 @@ const UIHandler = (function () {
 
 
     // Functionality to change in which system temperature is displayed
-    const fahrenheitButton = document.getElementById("fahrenheit");
-    const celsiusButton = document.getElementById("celsius");
-    fahrenheitButton.addEventListener("click", () => {
-        // If fahrenheit display is already turned on we don't have to do anything
-        if(!displayFahrenheit) {
-            displayFahrenheit = true;
-            changeTemperatureDisplays("F");
-        }
-    });
-    celsiusButton.addEventListener("click", () => {
-        // If celsius display is already turned on we don't have to do anything
+    const temperatureSlider = document.getElementById("temperature-slider");
+    temperatureSlider.addEventListener("click", () => {
+        displayFahrenheit = !displayFahrenheit;
         if(displayFahrenheit) {
-            displayFahrenheit = false;
+            changeTemperatureDisplays("F");
+        } else {
             changeTemperatureDisplays("C");
         }
-    })
-
+    });
 
 })();
 

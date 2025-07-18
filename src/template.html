@@ -3,12 +3,15 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Arimo:400&amp;lang=en" />
+        <link
+            rel="stylesheet"
+            href="//fonts.googleapis.com/css?family=Arimo:400,500,600&amp;lang=en"
+        />
         <title>Weather App</title>
     </head>
     <body>
         <form action="./UIHandler.js" id="location-form">
-            <label for="location">Search Location</label>
+            <label for="location">Search Location: </label>
             <input
                 type="text"
                 name="location"
@@ -19,13 +22,12 @@
             />
             <button class="search-location" type="submit">Search</button>
             <span class="temperature-type">
-                <input type="button" name="celsius" id="celsius" value="C" />
-                <input
-                    type="button"
-                    name="fahrenheit"
-                    id="fahrenheit"
-                    value="F"
-                />
+                <label>F</label>
+                <label class="switch">
+                    <input type="checkbox" id="temperature-slider"/>
+                    <span class="slider round"></span>
+                </label>
+                <label>C</label>
             </span>
         </form>
 
