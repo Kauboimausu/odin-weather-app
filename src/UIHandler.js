@@ -81,7 +81,7 @@ const UIHandler = (function () {
             e.preventDefault();
             const locationData = new FormData(locationForm);
             retrieveAndDisplay(locationData.get("location"));
-            locationForm.reset();
+            document.getElementById("location").value = "";
         });
     };
 
